@@ -46,6 +46,7 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
   assignTaskToUser(assignTaskToUserInput: AssignTaskInput!): User!
+  stopActiveTask(id: Int!): User!
 }
 
 input UpdateTaskInput {
