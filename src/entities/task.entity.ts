@@ -6,13 +6,16 @@ import {
   UpdateDateColumn,
   OneToMany,
   ManyToOne,
+  OneToOne,
 } from 'typeorm';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from './user.entity';
+import { IPostgresInterval } from 'postgres-interval';
 
 export enum TaskStatus {
   OPEN = 'OPEN',
   IN_PROGRESS = 'IN_PROGRESS',
+  STOP = 'STOP',
   DONE = 'DONE',
 }
 
@@ -37,7 +40,7 @@ export class Task {
     type: 'enum'
   })
   @Field({nullable: true})
-  status?: string;
+  status?: TaskStatus;
 
   @CreateDateColumn()
   @Field(type => Date)
@@ -47,13 +50,29 @@ export class Task {
   @Field(type => Date)
   updated_at: Date;
 
+  @Column({type: 'timestamp', nullable: true})
+  @Field(type => Date, {nullable: true})
+  started_at: Date;
+
+  @Column({type: 'timestamp', nullable: true})
+  @Field(type => Date, {nullable: true})
+  stopped_at: Date;
+
+  @Column({type: 'timestamp', nullable: true})
+  @Field(type => Date, {nullable: true})
+  finished_at: Date;
+
+  @Column({type: 'interval', nullable: true})
+  @Field(type => String, {nullable: true})
+  trackedTime: IPostgresInterval
+
   @Column({nullable: true})
-  @Field(type => Int)
+  @Field(type => Int, {nullable: true})
   userId?: number;
   
   @ManyToOne(() => User, user => user.activeTask)
   @Field(type => User)
-  assignedUser: User
+  assignedUser?: User
 }
 
 

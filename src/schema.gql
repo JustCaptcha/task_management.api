@@ -6,6 +6,8 @@ type User {
   id: Int!
   name: String!
   created_at: DateTime!
+  taskId: Int
+  prevTaskId: Int
   activeTask: Task
 }
 
@@ -21,7 +23,11 @@ type Task {
   status: String
   created_at: DateTime!
   updated_at: DateTime!
-  userId: Int!
+  started_at: DateTime
+  stopped_at: DateTime
+  finished_at: DateTime
+  trackedTime: String
+  userId: Int
   assignedUser: User!
   getUser: User!
 }
@@ -34,10 +40,25 @@ type Query {
 }
 
 type Mutation {
+  updateTask(updateTaskInput: UpdateTaskInput!): Task!
   createTask(createTaskInput: CreateTaskInput!): Task!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
+  assignTaskToUser(assignTaskToUserInput: AssignTaskInput!): User!
+}
+
+input UpdateTaskInput {
+  name: String
+  description: String
+  status: String
+  userId: Int
+  id: Int!
+  activeTask: Int
+  started_at: DateTime
+  stopped_at: DateTime
+  finished_at: DateTime
+  trackedTime: String
 }
 
 input CreateTaskInput {
@@ -54,4 +75,10 @@ input CreateUserInput {
 input UpdateUserInput {
   name: String
   id: Int!
+  activeTask: Int
+}
+
+input AssignTaskInput {
+  id: Int!
+  taskId: Int!
 }

@@ -17,6 +17,14 @@ export class User {
   @Field(type => Date)
   created_at: Date;
 
+  @Column({nullable: true})
+  @Field(type => Int, {nullable: true})
+  taskId?: number;
+
+  @Column({nullable: true})
+  @Field(type => Int, {nullable: true})
+  prevTaskId?: number;
+
   @OneToOne(() => Task, task => task.assignedUser)
   @Field(type => Task, {nullable: true})
   activeTask?: Task
