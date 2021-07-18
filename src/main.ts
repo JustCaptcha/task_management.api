@@ -8,5 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(SERVER_PORT);
+
+  console.log(`Server is running on ${SERVER_PORT}`)
+  console.log('API Playground! https://studio.apollographql.com/sandbox/explorer')
 }
 bootstrap();
