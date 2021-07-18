@@ -24,7 +24,13 @@
 
 ## Description
 
+A task management API
+
+## Useful links
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[GraphqlPlayground](https://studio.apollographql.com/sandbox/explorer) amazing graphql playground for API testing
+[API](./doc/API.md) API documentation
 
 ## Installation
 

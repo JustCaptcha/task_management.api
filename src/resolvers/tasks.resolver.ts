@@ -39,7 +39,7 @@ export class TasksResolver {
   }
 
   @ResolveField(returns => User)
-  async getUser(@Parent() user: User): Promise<User> {
+  async user(@Parent() user: User): Promise<User> {
     return await this.tasksService.getUser(user.id);
   }
 }
