@@ -40,6 +40,11 @@ export class UsersResolver {
     return this.usersService.assignTask(userInput);
   }
 
+  @Mutation(() => User)
+  stopActiveTask(@Args('id', { type: () => Int }) id: number) {
+    return this.usersService.stopActiveTask(id);
+  }
+
   @ResolveField(returns => User)
   async activeTask(@Parent() user: User): Promise<Task> {
     return await this.usersService.getTask(user.taskId);
